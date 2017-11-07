@@ -30,7 +30,7 @@ void InitTempSensors() {
     Serial.print("Found ");
     Serial.print(sensors.getDeviceCount(), DEC);
     Serial.println(" devices.");
-    StopTime = 0;
+    StopTime = 1000000;
 }
 
 void UpdateSensorTemps(){
@@ -51,27 +51,39 @@ void controlTemp(){
   // Check if we are in the anti cycling period.
   CurrentTime = millis();
   if (CurrentTime - StopTime > CyclingPeriod){
+    Serial.print("Current Time : ");
     Serial.println(CurrentTime);
+    Serial.print("Stop Time : ");
     Serial.println(StopTime);
     Serial.println("Out of Cycling Period");
   }
   else {
     Serial.println(CurrentTime);
+    Serial.print("Current Time : ");
     Serial.println(StopTime);
+    Serial.print("Stop Time : ");
     Serial.println("Inside Cycling Period");
     return;
   }
   // Got to here so okay to cool if needed
   FreezerSetTemprature = SetTemprature + (SetTemprature - (Beer1Temprature + Beer2Temprature)/2) * 1.5;
-  Serial.println("FreezerSetTemprature =");
+  Serial.print("Freezer Set Temprature =");
   Serial.println(FreezerSetTemprature);
+  Serial.print("Freezer Temprature =");
+  Serial.println(FreezerTemprature);
 
   if (FreezerSetTemprature < FreezerTemprature){
     // Turn cooling on
     Serial.println("Cooling On");
+    Cooling = true;
+    digitalWrite(D0,HIGH);
   }
   else {
-    Serial.println("Cooling Off");
-    StopTime = millis();
+    if (Cooling){
+      Serial.println("Cooling Off");
+      Cooling = false;
+      digitalWrite (D0,LOW);
+      StopTime = millis();
+    }
   }
 }
