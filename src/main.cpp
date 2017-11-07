@@ -27,7 +27,7 @@ void setup(void)
   // start serial port
   Serial.begin(9600);
   Serial.println("");
-  Serial.println("Kegerator V0.1");
+  Serial.println("Kegerator V0.2");
 
   // Setup Main OLED_CS
   MDisplayInit();
