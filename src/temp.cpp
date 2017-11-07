@@ -7,6 +7,7 @@ extern float Beer2Temprature;
 extern float SetTemprature;
 extern float FreezerTemprature;
 extern float FreezerSetTemprature;
+extern bool Cooling;
 
 unsigned long CurrentTime;
 unsigned long StopTime;

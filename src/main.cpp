@@ -14,6 +14,7 @@ float Beer2Temprature;
 float SetTemprature;
 float FreezerTemprature;
 float FreezerSetTemprature;
+bool Cooling;
 char Beer1Name[20];
 char Beer2Name[20];
 
@@ -45,6 +46,10 @@ void setup(void)
 
   // Initalise the temperature sensors.
   InitTempSensors();
+
+  // Default state is not cooling at startup.
+  digitalWrite(D0,LOW);
+  Cooling = false;
 }
 
 // The main program Loop
