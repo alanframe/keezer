@@ -25,12 +25,17 @@ void MDisplayNorm( float FreezerTemp , float Beer1Temp , float Beer2Temp , float
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0,0);
-  display.print("Ft=");
+  display.print("Frzt=");
   display.print(FreezerTemp);
-  display.print(" B1t=");
-  display.print(Beer1Temp);
+  display.print("  B1t=");
+  display.println(Beer1Temp);
+  display.print("SetT=");
+  display.print(SetTemp);
   display.print(" B2t=");
-  display.print(Beer2Temp);
+  display.println(Beer2Temp);
+  if (Cooling){
+    display.print("Cooling");
+  }
   display.display();
   delay(2000);
 }

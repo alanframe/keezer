@@ -27,7 +27,7 @@ void setup(void)
   // start serial port
   Serial.begin(9600);
   Serial.println("");
-  Serial.println("Kegerator V0.2");
+  Serial.println("Kegerator V0.3");
 
   // Setup Main OLED_CS
   MDisplayInit();
@@ -59,7 +59,7 @@ void loop(void)
 
 
   UpdateSensorTemps();
-  MDisplayNorm(Beer1Temprature,Beer2Temprature,FreezerTemprature,FreezerTemprature,true);
+  MDisplayNorm(FreezerTemprature,Beer1Temprature,Beer2Temprature,FreezerSetTemprature,Cooling);
   controlTemp();
 
 
