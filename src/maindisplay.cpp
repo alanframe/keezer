@@ -16,7 +16,7 @@ display.clearDisplay();
 display.setTextSize(2);
 display.setTextColor(WHITE);
 display.setCursor(0,0);
-display.println("Kegerator");
+display.println("Kegerator with WIFI");
 display.display();
 delay(2000);
 }
@@ -27,7 +27,7 @@ void MDisplayNorm( float FreezerTemp , float Beer1Temp , float Beer2Temp , float
   display.setCursor(0,0);
   display.print("Frzt=");
   display.print(FreezerTemp);
-  display.print("  B1t=");
+  display.print(" B1t=");
   display.println(Beer1Temp);
   display.print("SetT=");
   display.print(SetTemp);
