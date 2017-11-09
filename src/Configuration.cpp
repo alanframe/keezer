@@ -50,13 +50,13 @@ void SetBeerName( int BeerIndex, char* BeerName ){
 }
 
 float GetDesiredTemp(){
-  // Read the desired Temprature from EEprom
-  float Temprature;
-  EEPROM.get(DesiredTempAddress, Temprature);
-  return Temprature;
+  // Read the desired Temperature from EEprom
+  float Temperature;
+  EEPROM.get(DesiredTempAddress, Temperature);
+  return Temperature;
 }
 
-void SetDesiredTemp( float Temprature){
-  // Write the desired Temprature to EEprom
-  EEPROM.put(DesiredTempAddress, Temprature);
+void SetDesiredTemp( float Temperature){
+  // Write the desired Temperature to EEprom
+  EEPROM.put(DesiredTempAddress, Temperature);
 }

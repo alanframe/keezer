@@ -2,11 +2,11 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-extern float Beer1Temprature;
-extern float Beer2Temprature;
-extern float SetTemprature;
-extern float FreezerTemprature;
-extern float FreezerSetTemprature;
+extern float Beer1Temperature;
+extern float Beer2Temperature;
+extern float SetTemperature;
+extern float FreezerTemperature;
+extern float FreezerSetTemperature;
 extern bool Cooling;
 
 unsigned long CurrentTime;
@@ -35,16 +35,16 @@ void InitTempSensors() {
 
 void UpdateSensorTemps(){
   sensors.requestTemperatures();
-  Beer1Temprature = sensors.getTempCByIndex(0);
-  Beer2Temprature = sensors.getTempCByIndex(1);
-  FreezerTemprature = sensors.getTempCByIndex(2);
+  Beer1Temperature = sensors.getTempCByIndex(0);
+  Beer2Temperature = sensors.getTempCByIndex(1);
+  FreezerTemperature = sensors.getTempCByIndex(2);
 }
 
 
 
 void controlTemp(){
   // for debug now
-  SetTemprature = 27;
+  
   CyclingPeriod = 40000;
   UpdateSensorTemps();
 
@@ -66,13 +66,13 @@ void controlTemp(){
     return;
   }
   // Got to here so okay to cool if needed
-  FreezerSetTemprature = SetTemprature + (SetTemprature - (Beer1Temprature + Beer2Temprature)/2) * 1.5;
-  Serial.print("Freezer Set Temprature =");
-  Serial.println(FreezerSetTemprature);
-  Serial.print("Freezer Temprature =");
-  Serial.println(FreezerTemprature);
+  FreezerSetTemperature = SetTemperature + (SetTemperature - (Beer1Temperature + Beer2Temperature)/2) * 1.5;
+  Serial.print("Freezer Set Temperature =");
+  Serial.println(FreezerSetTemperature);
+  Serial.print("Freezer Temperature =");
+  Serial.println(FreezerTemperature);
 
-  if (FreezerSetTemprature < FreezerTemprature){
+  if (FreezerSetTemperature < FreezerTemperature){
     // Turn cooling on
     Serial.println("Cooling On");
     Cooling = true;

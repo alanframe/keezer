@@ -16,11 +16,11 @@
 MDNSResponder mdns;
 
 // Setup some variables
-float Beer1Temprature;
-float Beer2Temprature;
-float SetTemprature;
-float FreezerTemprature;
-float FreezerSetTemprature;
+float Beer1Temperature;
+float Beer2Temperature;
+float SetTemperature;
+float FreezerTemperature;
+float FreezerSetTemperature;
 bool Cooling;
 char Beer1Name[20];
 char Beer2Name[20];
@@ -30,7 +30,7 @@ String webPage = "";
 
 void setup(void)
 {
-  webPage += "<h1>Kegerator is Online !</h1><p>";
+  SetTemperature = 12;
   pinMode(D0, OUTPUT);
   // start serial port
   Serial.begin(9600);
@@ -50,6 +50,16 @@ void setup(void)
   }
 
   server.on("/", [](){
+  server.send(200, "text/html", webPage);
+  });
+
+  server.on("/tup", [](){
+  SetTemperature += 0.5;
+  server.send(200, "text/html", webPage);
+  });
+
+  server.on("/tdown", [](){
+  SetTemperature -= 0.5;
   server.send(200, "text/html", webPage);
   });
 
@@ -86,8 +96,18 @@ void loop(void)
 
 
   UpdateSensorTemps();
-  MDisplayNorm(FreezerTemprature,Beer1Temprature,Beer2Temprature,FreezerSetTemprature,Cooling);
+  MDisplayNorm(FreezerTemperature,Beer1Temperature,Beer2Temperature,FreezerSetTemperature,Cooling);
   controlTemp();
+  webPage = "<h1>Kegerator is Online !</h1><p>Set Temperature =";
+  webPage += SetTemperature;
+  webPage += "<br>Freezer Target Temperature =";
+  webPage += FreezerSetTemperature;
+  webPage += "<br>Freezer Temperature =";
+  webPage += FreezerTemperature;
+  webPage += "<br>Beer 1 Temperature =";
+  webPage += Beer1Temperature;
+  webPage += "<br>Beer 2 Temperature =";
+  webPage += Beer2Temperature;
   server.handleClient();
 
 
